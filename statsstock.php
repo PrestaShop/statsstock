@@ -35,7 +35,7 @@ class StatsStock extends Module
 	{
 		$this->name = 'statsstock';
 		$this->tab = 'analytics_stats';
-		$this->version = '1.3';
+		$this->version = '1.4.1';
 		$this->author = 'PrestaShop';
 		$this->need_instance = 0;
 
