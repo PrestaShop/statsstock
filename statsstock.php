@@ -30,6 +30,7 @@ if (!defined('_PS_VERSION_'))
 class StatsStock extends Module
 {
 	private $html = '';
+	private $employeeFilters;
 
 	public function __construct()
 	{
@@ -44,6 +45,11 @@ class StatsStock extends Module
 		$this->displayName = $this->l('Available quantities');
 		$this->description = $this->l('Adds a tab showing the quantity of available products for sale to the Stats dashboard.');
 		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
+
+		$this->employeeFilters = $this->context->cookie;
+        if (version_compare(_PS_VERSION_, '1.7.0', '>=')) {
+            $this->employeeFilters = $this->context->employee->filters;
+        }
 	}
 
 	public function install()
@@ -54,11 +60,11 @@ class StatsStock extends Module
 	public function hookAdminStatsModules()
 	{
 		if (Tools::isSubmit('submitCategory'))
-			$this->context->cookie->statsstock_id_category = Tools::getValue('statsstock_id_category');
+			$this->employeeFilters->statsstock_id_category = Tools::getValue('statsstock_id_category');
 
 		$ru = AdminController::$currentIndex.'&module='.$this->name.'&token='.Tools::getValue('token');
 		$currency = new Currency(Configuration::get('PS_CURRENCY_DEFAULT'));
-		$filter = ((int)$this->context->cookie->statsstock_id_category ? ' AND p.id_product IN (SELECT cp.id_product FROM '._DB_PREFIX_.'category_product cp WHERE cp.id_category = '.(int)$this->context->cookie->statsstock_id_category.')' : '');
+		$filter = ((int)$this->employeeFilters->statsstock_id_category ? ' AND p.id_product IN (SELECT cp.id_product FROM '._DB_PREFIX_.'category_product cp WHERE cp.id_category = '.(int)$this->employeeFilters->statsstock_id_category.')' : '');
 
 		$sql = 'SELECT p.id_product, p.reference, pl.name,
 				IFNULL((
@@ -95,7 +101,7 @@ class StatsStock extends Module
 						<option value="0">- '.$this->l('All').' -</option>';
 				foreach (Category::getSimpleCategories($this->context->language->id) as $category)
 					$this->html .= '<option value="'.(int)$category['id_category'].'" '.
-						($this->context->cookie->statsstock_id_category == $category['id_category'] ? 'selected="selected"' : '').'>'.
+						($this->employeeFilters->statsstock_id_category == $category['id_category'] ? 'selected="selected"' : '').'>'.
 						$category['name'].'
 					</option>';
 		$this->html .= '
