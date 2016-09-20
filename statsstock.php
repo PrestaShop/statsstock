@@ -67,6 +67,7 @@ class StatsStock extends Module
 					'.Shop::addSqlAssociation('product_attribute', 'pa').'
 					WHERE p.id_product = pa.id_product
 					AND product_attribute_shop.wholesale_price != 0
+					AND p.state = '. Product::STATE_SAVED . '
 				), product_shop.wholesale_price) as wholesale_price,
 				IFNULL(stock.quantity, 0) as quantity
 				FROM '._DB_PREFIX_.'product p
@@ -74,8 +75,7 @@ class StatsStock extends Module
 				INNER JOIN '._DB_PREFIX_.'product_lang pl
 					ON (p.id_product = pl.id_product AND pl.id_lang = '.(int)$this->context->language->id.Shop::addSqlRestrictionOnLang('pl').')
 				'.Product::sqlStock('p', 0).'
-				WHERE 1 = 1
-				'.$filter;
+				WHERE p.state = '. Product::STATE_SAVED . $filter;
 		$products = Db::getInstance()->executeS($sql);
 
 		foreach ($products as $key => $p)
