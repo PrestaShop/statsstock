@@ -66,16 +66,21 @@ class StatsStock extends Module
 					FROM '._DB_PREFIX_.'product_attribute pa
 					'.Shop::addSqlAssociation('product_attribute', 'pa').'
 					WHERE p.id_product = pa.id_product
-					AND product_attribute_shop.wholesale_price != 0
-					AND p.state = '. Product::STATE_SAVED . '
-				), product_shop.wholesale_price) as wholesale_price,
+					AND product_attribute_shop.wholesale_price != 0 ';
+		if (version_compare(_PS_VERSION_, '1.7.0.0', '>=')) {
+			$sql .= 'AND p.state = ' . Product::STATE_SAVED . ' ';
+		}
+		$sql .= '), product_shop.wholesale_price) as wholesale_price,
 				IFNULL(stock.quantity, 0) as quantity
 				FROM '._DB_PREFIX_.'product p
 				'.Shop::addSqlAssociation('product', 'p').'
 				INNER JOIN '._DB_PREFIX_.'product_lang pl
 					ON (p.id_product = pl.id_product AND pl.id_lang = '.(int)$this->context->language->id.Shop::addSqlRestrictionOnLang('pl').')
-				'.Product::sqlStock('p', 0).'
-				WHERE p.state = '. Product::STATE_SAVED . $filter;
+				'.Product::sqlStock('p', 0);
+		if (version_compare(_PS_VERSION_, '1.7.0.0', '>=')) {
+			$sql .= ' WHERE p.state = ' . Product::STATE_SAVED . ' ';
+		}
+		$sql .= $filter;
 		$products = Db::getInstance()->executeS($sql);
 
 		foreach ($products as $key => $p)
