@@ -36,15 +36,15 @@ class statsstock extends Module
     {
         $this->name = 'statsstock';
         $this->tab = 'analytics_stats';
-        $this->version = '1.5.0';
+        $this->version = '2.0.0';
         $this->author = 'PrestaShop';
         $this->need_instance = 0;
 
         parent::__construct();
 
-        $this->displayName = $this->l('Available quantities');
-        $this->description = $this->l('Adds a tab showing the quantity of available products for sale to the Stats dashboard.');
-        $this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
+        $this->displayName = $this->trans('Available quantities', array(), 'Modules.Statsstock.Admin');
+        $this->description = $this->trans('Adds a tab showing the quantity of available products for sale to the Stats dashboard.', array(), 'Modules.Statsstock.Admin');
+        $this->ps_versions_compliancy = array('min' => '1.7.0.0', 'max' => _PS_VERSION_);
     }
 
     public function install()
@@ -88,14 +88,14 @@ class statsstock extends Module
 		<script type="text/javascript">$(\'#calendar\').slideToggle();</script>
 
 		<div class="panel-heading">'
-            .$this->l('Evaluation of available quantities for sale').
+            .$this->trans('Evaluation of available quantities for sale', array(), 'Modules.Statsstock.Admin').
         '</div>
 		<form action="'.Tools::safeOutput($ru).'" method="post" class="form-horizontal">
 			<div class="row row-margin-bottom">
-				<label class="control-label col-lg-3">'.$this->l('Category').'</label>
+				<label class="control-label col-lg-3">'.$this->trans('Category', array(), 'Admin.Global').'</label>
 				<div class="col-lg-6">
 					<select name="statsstock_id_category" onchange="this.form.submit();">
-						<option value="0">- '.$this->l('All').' -</option>';
+						<option value="0">- '.$this->trans('All', array(), 'Admin.Global').' -</option>';
         foreach (Category::getSimpleCategories($this->context->language->id) as $category) {
             $this->html .= '<option value="'.(int)$category['id_category'].'" '.
                         ($this->context->cookie->statsstock_id_category == $category['id_category'] ? 'selected="selected"' : '').'>'.
@@ -110,19 +110,19 @@ class statsstock extends Module
 		</form>';
 
         if (!count($products)) {
-            $this->html .= '<p>'.$this->l('Your catalog is empty.').'</p>';
+            $this->html .= '<p>'.$this->trans('Your catalog is empty.', array(), 'Modules.Statsstock.Admin').'</p>';
         } else {
             $rollup = array('quantity' => 0, 'wholesale_price' => 0, 'stockvalue' => 0);
             $this->html .= '
 			<table class="table">
 				<thead>
 					<tr>
-						<th><span class="title_box active">'.$this->l('ID').'</span></th>
-						<th><span class="title_box active">'.$this->l('Ref.').'</span></th>
-						<th><span class="title_box active">'.$this->l('Item').'</span></th>
-						<th><span class="title_box active">'.$this->l('Available quantity for sale').'</span></th>
-						<th><span class="title_box active">'.$this->l('Price*').'</span></th>
-						<th><span class="title_box active">'.$this->l('Value').'</span></th>
+						<th><span class="title_box active">'.$this->trans('ID', array(), 'Admin.Global').'</span></th>
+						<th><span class="title_box active">'.$this->trans('Ref.', array(), 'Modules.Statsstock.Admin').'</span></th>
+						<th><span class="title_box active">'.$this->trans('Item', array(), 'Admin.Global').'</span></th>
+						<th><span class="title_box active">'.$this->trans('Available quantity for sale', array(), 'Admin.Global').'</span></th>
+						<th><span class="title_box active">'.$this->trans('Price*', array(), 'Modules.Statsstock.Admin').'</span></th>
+						<th><span class="title_box active">'.$this->trans('Value', array(), 'Admin.Global').'</span></th>
 					</tr>
 				</thead>
 				<tbody>';
@@ -144,9 +144,9 @@ class statsstock extends Module
 				<tfoot>
 					<tr>
 						<th colspan="3"></th>
-						<th><span class="title_box active">'.$this->l('Total quantities').'</span></th>
-						<th><span class="title_box active">'.$this->l('Average price').'</span></th>
-						<th><span class="title_box active">'.$this->l('Total value').'</span></th>
+						<th><span class="title_box active">'.$this->trans('Total quantities', array(), 'Modules.Statsstock.Admin').'</span></th>
+						<th><span class="title_box active">'.$this->trans('Average price', array(), 'Admin.Global').'</span></th>
+						<th><span class="title_box active">'.$this->trans('Total value', array(), 'Modules.Statsstock.Admin').'</span></th>
 					</tr>
 					<tr>
 						<td colspan="3"></td>
@@ -156,7 +156,7 @@ class statsstock extends Module
 					</tr>
 				</tfoot>
 			</table>
-			<i class="icon-asterisk"></i> '.$this->l('This section corresponds to the default wholesale price according to the default supplier for the product. An average price is used when the product has attributes.');
+			<i class="icon-asterisk"></i> '.$this->trans('This section corresponds to the default wholesale price according to the default supplier for the product. An average price is used when the product has attributes.', array(), 'Modules.Statsstock.Admin');
 
             return $this->html;
         }
