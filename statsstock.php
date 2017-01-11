@@ -43,7 +43,7 @@ class StatsStock extends Module
 
 		$this->displayName = $this->l('Available quantities');
 		$this->description = $this->l('Adds a tab showing the quantity of available products for sale to the Stats dashboard.');
-		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
+		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => '1.7.0.99');
 	}
 
 	public function install()
