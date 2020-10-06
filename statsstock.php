@@ -48,7 +48,6 @@ class statsstock extends Module
 
     public function install()
     {
-        return parent::install() && $this->registerHook('displayAdminStatsModules');
     }
 
     public function hookDisplayAdminStatsModules()
