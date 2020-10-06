@@ -43,7 +43,7 @@ class statsstock extends Module
         parent::__construct();
 
         $this->displayName = $this->trans('Available quantities', array(), 'Modules.Statsstock.Admin');
-        $this->description = $this->trans('Adds a tab showing the quantity of available products for sale to the Stats dashboard.', array(), 'Modules.Statsstock.Admin');
+        $this->description = $this->trans('Enrich the ‘Stats’ section of your back office, add a tab showing the available quantities of products left for sale.', array(), 'Modules.Statsstock.Admin');
         $this->ps_versions_compliancy = array('min' => '1.7.1.0', 'max' => _PS_VERSION_);
     }
 
