@@ -2,7 +2,7 @@
 
 ## About
 
-Adds a tab showing the quantity of available products for sale to the Stats dashboard.
+Enrich the ‘Stats’ section of your back office, add a tab showing the available quantities of products left for sale.
 
 ## Reporting issues
 
