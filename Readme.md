@@ -2,7 +2,7 @@
 
 ## About
 
-Enrich the ‘Stats’ section of your back office, add a tab showing the available quantities of products left for sale.
+Enrich your stats, add a tab showing the available quantities of products left for sale.
 
 ## Reporting issues
 
