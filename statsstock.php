@@ -135,8 +135,8 @@ class statsstock extends Module
 						<td>'.$product['reference'].'</td>
 						<td>'.$product['name'].'</td>
 						<td>'.$product['quantity'].'</td>
-						<td>'.Tools::displayPrice($product['wholesale_price'], $currency).'</td>
-						<td>'.Tools::displayPrice($product['stockvalue'], $currency).'</td>
+						<td>' . $this->context->getCurrentLocale()->formatPrice($product['wholesale_price'], $currency->iso_code) . '</td>
+						<td>' . $this->context->getCurrentLocale()->formatPrice($product['stockvalue'], $currency->iso_code) . '</td>
 					</tr>';
             }
             $this->html .= '
@@ -151,8 +151,8 @@ class statsstock extends Module
 					<tr>
 						<td colspan="3"></td>
 						<td>'.$rollup['quantity'].'</td>
-						<td>'.Tools::displayPrice($rollup['wholesale_price'] / count($products), $currency).'</td>
-						<td>'.Tools::displayPrice($rollup['stockvalue'], $currency).'</td>
+						<td>' . $this->context->getCurrentLocale()->formatPrice($rollup['wholesale_price'] / count($products), $currency->iso_code) . '</td>
+						<td>' . $this->context->getCurrentLocale()->formatPrice($rollup['stockvalue'], $currency->iso_code) . '</td>
 					</tr>
 				</tfoot>
 			</table>
