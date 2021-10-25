@@ -34,8 +34,8 @@ class statsstock extends Module
     public function __construct()
     {
         $this->name = 'statsstock';
-        $this->tab = 'administration';
         $this->version = '2.0.1';
+        $this->tab = 'administration';
         $this->author = 'PrestaShop';
         $this->need_instance = 0;
 
@@ -43,7 +43,7 @@ class statsstock extends Module
 
         $this->displayName = $this->trans('Available quantities', [], 'Modules.Statsstock.Admin');
         $this->description = $this->trans('Enrich your stats, add a tab showing the available quantities of products left for sale.', [], 'Modules.Statsstock.Admin');
-        $this->ps_versions_compliancy = ['min' => '1.7.1.0', 'max' => _PS_VERSION_];
+        $this->ps_versions_compliancy = array('min' => '1.7.6.0', 'max' => _PS_VERSION_);
     }
 
     public function install()
