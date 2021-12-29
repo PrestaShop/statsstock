@@ -36,7 +36,7 @@ class statsstock extends Module
     {
         $this->name = 'statsstock';
         $this->tab = 'analytics_stats';
-        $this->version = '2.0.0';
+        $this->version = '2.0.1';
         $this->author = 'PrestaShop';
         $this->need_instance = 0;
 
@@ -49,10 +49,10 @@ class statsstock extends Module
 
     public function install()
     {
-        return parent::install() && $this->registerHook('AdminStatsModules');
+        return parent::install() && $this->registerHook('displayAdminStatsModules');
     }
 
-    public function hookAdminStatsModules()
+    public function hookDisplayAdminStatsModules()
     {
         if (Tools::isSubmit('submitCategory')) {
             $this->context->cookie->statsstock_id_category = Tools::getValue('statsstock_id_category');
