@@ -58,7 +58,7 @@ class statsstock extends Module
         }
 
         $ru = AdminController::$currentIndex . '&module=' . $this->name . '&token=' . Tools::getValue('token');
-        $currency = new Currency(Configuration::get('PS_CURRENCY_DEFAULT'));
+        $currency = new Currency((int) Configuration::get('PS_CURRENCY_DEFAULT'));
         $filter = ((int) $this->context->cookie->statsstock_id_category ? ' AND p.id_product IN (SELECT cp.id_product FROM ' . _DB_PREFIX_ . 'category_product cp WHERE cp.id_category = ' . (int) $this->context->cookie->statsstock_id_category . ')' : '');
 
         $sql = 'SELECT p.id_product, p.reference, pl.name,
@@ -77,6 +77,7 @@ class statsstock extends Module
 				' . Product::sqlStock('p', 0) . '
 				WHERE 1 = 1
 				' . $filter;
+        /** @var array<array{id_product: int, reference: string, name: string, wholesale_price: float, quantity: int}> $products */
         $products = Db::getInstance()->executeS($sql);
 
         foreach ($products as $key => $p) {
@@ -134,8 +135,12 @@ class statsstock extends Module
 						<td>' . $product['reference'] . '</td>
 						<td>' . $product['name'] . '</td>
 						<td>' . $product['quantity'] . '</td>
-						<td>' . $this->context->getCurrentLocale()->formatPrice($product['wholesale_price'], $currency->iso_code) . '</td>
-						<td>' . $this->context->getCurrentLocale()->formatPrice($product['stockvalue'], $currency->iso_code) . '</td>
+						<td>'
+                    . (method_exists($this->context, 'getCurrentLocale') ? $this->context->getCurrentLocale()->formatPrice($product['wholesale_price'], $currency->iso_code) : $product['wholesale_price'])
+                    . '</td>
+						<td>'
+                    . (method_exists($this->context, 'getCurrentLocale') ? $this->context->getCurrentLocale()->formatPrice($product['stockvalue'], $currency->iso_code) : $product['stockvalue'])
+                    . '</td>
 					</tr>';
             }
             $this->html .= '
@@ -150,8 +155,12 @@ class statsstock extends Module
 					<tr>
 						<td colspan="3"></td>
 						<td>' . $rollup['quantity'] . '</td>
-						<td>' . $this->context->getCurrentLocale()->formatPrice($rollup['wholesale_price'] / count($products), $currency->iso_code) . '</td>
-						<td>' . $this->context->getCurrentLocale()->formatPrice($rollup['stockvalue'], $currency->iso_code) . '</td>
+						<td>'
+                . (method_exists($this->context, 'getCurrentLocale') ? $this->context->getCurrentLocale()->formatPrice($rollup['wholesale_price'] / count($products), $currency->iso_code) : $rollup['wholesale_price'] / count($products))
+                . '</td>
+						<td>'
+                . (method_exists($this->context, 'getCurrentLocale') ? $this->context->getCurrentLocale()->formatPrice($rollup['stockvalue'], $currency->iso_code) : $rollup['stockvalue'])
+                . '</td>
 					</tr>
 				</tfoot>
 			</table>
