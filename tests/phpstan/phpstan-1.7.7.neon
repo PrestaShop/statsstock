@@ -3,3 +3,4 @@ includes:
 
 parameters:
   ignoreErrors:
+    - '#Access to an undefined property Cookie::\$statsstock_id_category.#'
