@@ -44,7 +44,6 @@ class statsstock extends Module
         $this->ps_versions_compliancy = array('min' => '1.7.6.0', 'max' => _PS_VERSION_);
         $this->displayName = $this->trans('Available quantities', [], 'Modules.Statsstock.Admin');
         $this->description = $this->trans('Enrich your stats, add a tab showing the available quantities of products left for sale.', [], 'Modules.Statsstock.Admin');
-        $this->displayName = $this->trans('Available quantities', [], 'Modules.Statsstock.Admin');
     }
 
     public function install()
