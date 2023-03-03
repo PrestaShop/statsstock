@@ -1,0 +1,14 @@
+GitHub contributors:
+--------------------------------
+ - Caleydon
+ - Francois Gaillard
+ - Gregory Roussac
+ - Jerome Nadaud
+ - Jérôme Nadaud
+ - Maxime Biloé
+ - Quetzacoalt91
+ - antoin-m
+ - eternoendless
+ - gaillafr
+ - maximebiloe
+ - sfroment

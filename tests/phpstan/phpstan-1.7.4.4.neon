@@ -1,0 +1,7 @@
+includes:
+	- %currentWorkingDirectory%/tests/phpstan/phpstan.neon
+
+parameters:
+  ignoreErrors:
+    - '#Access to an undefined property Cookie::\$statsstock_id_category.#'
+    - '#Parameter \#1 \$id of class Currency constructor expects null, int given.#'
