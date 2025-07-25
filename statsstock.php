@@ -57,7 +57,7 @@ class statsstock extends Module
             $this->context->cookie->statsstock_id_category = Tools::getValue('statsstock_id_category');
         }
 
-				$ru = $this->context->link->getAdminLink('AdminStats', true) . '&module=' . $this->name;
+	$ru = $this->context->link->getAdminLink('AdminStats', true) . '&module=' . $this->name;
         $currency = new Currency((int) Configuration::get('PS_CURRENCY_DEFAULT'));
         $filter = ((int) $this->context->cookie->statsstock_id_category ? ' AND p.id_product IN (SELECT cp.id_product FROM ' . _DB_PREFIX_ . 'category_product cp WHERE cp.id_category = ' . (int) $this->context->cookie->statsstock_id_category . ')' : '');
 
