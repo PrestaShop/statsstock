@@ -34,7 +34,7 @@ class statsstock extends Module
     public function __construct()
     {
         $this->name = 'statsstock';
-        $this->version = '2.0.1';
+        $this->version = '2.0.2';
         $this->tab = 'administration';
         $this->author = 'PrestaShop';
         $this->need_instance = 0;
