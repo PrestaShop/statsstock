@@ -4,6 +4,10 @@
 
 Enrich your stats, add a tab showing the available quantities of products left for sale.
 
+## Compatibility
+
+PrestaShop: `1.7.6.0` or later
+
 ## Reporting issues
 
 You can report issues with this module in the main PrestaShop repository. [Click here to report an issue][report-issue]. 
